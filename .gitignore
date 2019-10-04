@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+
+# .vscode configurations
+/assignement_1/.vscode/**
