@@ -147,14 +147,16 @@ void checkPolynomial(string polynomial)
         int degre = CheckMember(member);
         if (degre == -1 || VectorContains(degres, degre))
         {
-            cout << "Invalid polynomial expression" << endl;
+            cout << "Invalid polynomial expression.\n"
+                 << endl;
             return;
         }
         else
             degres.push_back(degre);
     }
     int complexity = GetMaxVector(degres);
-    cout << "Valid polynomial of complexity " << complexity << endl;
+    cout << "Polynomial is valid, and it's complexity is O(n^" << complexity << ").\n"
+         << endl;
 
     return;
 }
@@ -172,13 +174,14 @@ void Exercise1()
 }
 
 /** 
- * * Prints the content of a vector<int>
+ * * Helper function that prints the content of a vector<T>
  */
-void PrintVector(vector<int> vec)
+template <typename T>
+void PrintVector(vector<T> vec)
 {
-    for (const int i : vec)
+    for (const T elm : vec)
     {
-        cout << i << ", ";
+        cout << elm << " ";
     }
     cout << endl;
 }
@@ -189,7 +192,7 @@ void PrintVector(vector<int> vec)
  */
 vector<int> findMultiplyingSubset(vector<int> integers, int target)
 {
-    // Find divisibles
+    // Find divisibles of target
     vector<int> divisibles;
     for (const int v : integers)
     {
@@ -201,21 +204,25 @@ vector<int> findMultiplyingSubset(vector<int> integers, int target)
     int divisiblesSize = divisibles.size();
     int i = 0, j = 0;
     int copyTarget = target;
+
     while (i < divisiblesSize)
     {
         j = i;
         while (j < divisiblesSize)
         {
             int currentDiv = divisibles[j];
+            // we have to check here for further loops iterations with target being modified hereunder
             if (target % currentDiv == 0)
             {
                 target /= currentDiv;
                 result.push_back(currentDiv);
             }
+            // if target is 1 then we found a subset
             if (target == 1)
                 return result;
             ++j;
         }
+        // reseting variables
         ++i;
         result.clear();
         target = copyTarget;
@@ -245,7 +252,11 @@ void Exercise2()
 
 int main()
 {
+    cout << "EXERCISE 1: \n"
+         << endl;
     Exercise1();
+    cout << "EXERCISE 2: \n"
+         << endl;
     Exercise2();
     cout << system("pause");
     return 0;
