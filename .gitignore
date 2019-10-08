@@ -33,3 +33,7 @@
 
 # .vscode configurations
 /assignement_1/.vscode/**
+**/**.docx
+**/**.zip
+**/*.zip
+**/*.docx
