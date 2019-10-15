@@ -23,8 +23,8 @@ public:
     void pushSecond(T);
     void popFirst();
     void popSecond();
-    const T peekFirst() const;
-    const T peekSecond() const;
-    const bool emptyFirst() const;
-    const bool emptySecond() const;
+    T peekFirst() const;
+    T peekSecond() const;
+    bool emptyFirst() const;
+    bool emptySecond() const;
 };
