@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/c/Users/Alexandre Zajac/Desktop/Programmation/Training/CS014/assignements/assignement_2/PriorityQueue.cpp
+iostream
+-
+string
+-
+vector
+-
+PriorityQueue.h
+/mnt/c/Users/Alexandre Zajac/Desktop/Programmation/Training/CS014/assignements/assignement_2/PriorityQueue.h
+
+/mnt/c/Users/Alexandre Zajac/Desktop/Programmation/Training/CS014/assignements/assignement_2/PriorityQueue.h
+iostream
+-
+string
+-
+vector
+-
+
+/mnt/c/Users/Alexandre Zajac/Desktop/Programmation/Training/CS014/assignements/assignement_2/main.cpp
+iostream
+-
+string
+-
+vector
+-
+PriorityQueue.h
+/mnt/c/Users/Alexandre Zajac/Desktop/Programmation/Training/CS014/assignements/assignement_2/PriorityQueue.h
+
