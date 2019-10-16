@@ -38,6 +38,7 @@ int main()
   dummyHead->Enqueue(newNode12);
   PriorityQueue *newNode13 = new PriorityQueue(4);
   dummyHead->Enqueue(newNode13);
+  dummyHead->Dequeue();
   dummyHead->Display();
   system("pause");
   return 0;

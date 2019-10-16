@@ -13,18 +13,20 @@ class PriorityQueue
 private:
     int data;
     PriorityQueue *next;
-    PriorityQueue *tenNext;
+    PriorityQueue *tenthNext;
 
 public:
     PriorityQueue(int data);
     ~PriorityQueue();
     // accessors
     const int GetData() const;
-    const PriorityQueue* GetNext() const;
+    const PriorityQueue *GetNext() const;
+    const PriorityQueue *GetTenthNext() const;
     // mutators
-    void SetNext(PriorityQueue* newNode);
+    void SetNext(PriorityQueue *newNode);
     // member methods
-    void Enqueue(PriorityQueue* newNode);
+    void Enqueue(PriorityQueue *newNode);
     void Dequeue();
+    const PriorityQueue *Peek() const;
     void Display();
 };
