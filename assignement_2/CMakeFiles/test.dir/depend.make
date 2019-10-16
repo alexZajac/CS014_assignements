@@ -4,6 +4,7 @@
 CMakeFiles/test.dir/PriorityQueue.cpp.o: PriorityQueue.cpp
 CMakeFiles/test.dir/PriorityQueue.cpp.o: PriorityQueue.h
 
+CMakeFiles/test.dir/test.cpp.o: DoubleStack.h
 CMakeFiles/test.dir/test.cpp.o: PriorityQueue.h
 CMakeFiles/test.dir/test.cpp.o: test.cpp
 CMakeFiles/test.dir/test.cpp.o: googletest/googletest/include/gtest/gtest-death-test.h

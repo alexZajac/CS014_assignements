@@ -6,6 +6,16 @@
 
 #IncludeRegexTransform: 
 
+/mnt/c/Users/Alexandre Zajac/Desktop/Programmation/Training/CS014/assignements/assignement_2/DoubleStack.h
+DoubleStack.h
+/mnt/c/Users/Alexandre Zajac/Desktop/Programmation/Training/CS014/assignements/assignement_2/DoubleStack.h
+iostream
+-
+string
+-
+vector
+-
+
 /mnt/c/Users/Alexandre Zajac/Desktop/Programmation/Training/CS014/assignements/assignement_2/PriorityQueue.cpp
 iostream
 -
@@ -27,6 +37,8 @@ vector
 /mnt/c/Users/Alexandre Zajac/Desktop/Programmation/Training/CS014/assignements/assignement_2/test.cpp
 PriorityQueue.h
 /mnt/c/Users/Alexandre Zajac/Desktop/Programmation/Training/CS014/assignements/assignement_2/PriorityQueue.h
+DoubleStack.h
+/mnt/c/Users/Alexandre Zajac/Desktop/Programmation/Training/CS014/assignements/assignement_2/DoubleStack.h
 gtest/gtest.h
 /mnt/c/Users/Alexandre Zajac/Desktop/Programmation/Training/CS014/assignements/assignement_2/gtest/gtest.h
 
