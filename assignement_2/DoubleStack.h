@@ -1,6 +1,16 @@
 #ifndef DOUBLESTACK_H
 #define DOUBLESTACK_H
 
+#include <iostream>
+#include <string>
+#include <vector>
+
+using std::cin;
+using std::cout;
+using std::endl;
+using std::string;
+using std::vector;
+
 template <typename T>
 class DoubleStack
 {
@@ -36,17 +46,6 @@ public:
     const void print() const;
 };
 
-#include "DoubleStack.h"
-#include <iostream>
-#include <string>
-#include <vector>
-
-using std::cin;
-using std::cout;
-using std::endl;
-using std::string;
-using std::vector;
-
 template <typename T>
 DoubleStack<T>::DoubleStack()
 {
@@ -61,7 +60,7 @@ DoubleStack<T>::DoubleStack()
 template <typename T>
 DoubleStack<T>::~DoubleStack()
 {
-    delete this->data;
+    delete[] this->data;
 }
 
 template <typename T>
