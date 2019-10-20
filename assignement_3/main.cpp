@@ -3,6 +3,7 @@
 #include <vector>
 #include <time.h>
 #include "Sort.h"
+#include "PointerHeap.cpp"
 
 using std::cin;
 using std::cout;
@@ -33,8 +34,28 @@ void Exercise2(){
   printArray(heapTime, 6);
 }
 
+void Exercise1(){
+  PointerHeap<int> *root = new PointerHeap<int>(0);
+  PointerHeap<int> *lastChild = root;
+  PointerHeap<int> *pth1 = new PointerHeap<int>(1);
+  root->Insert(lastChild,pth1,false,false);
+  lastChild = pth1;
+  PointerHeap<int> *pth2 = new PointerHeap<int>(2);
+  root->Insert(lastChild,pth2,false,false);
+  lastChild = pth2;
+  PointerHeap<int> *pth3 = new PointerHeap<int>(3);
+  root->Insert(lastChild,pth3,false,false);
+  lastChild = pth3;
+  PointerHeap<int> *pth4 = new PointerHeap<int>(4);
+  root->Insert(lastChild,pth4,false,false);
+  lastChild = pth4;
+  PointerHeap<int> *pth5 = new PointerHeap<int>(5);
+  root->Insert(lastChild,pth5,false,false);
+  lastChild = pth5;
+}
+
 int main()
 {
-  Exercise2();
+  Exercise1();
   system("pause");
 }
