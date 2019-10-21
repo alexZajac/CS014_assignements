@@ -6,17 +6,13 @@ template<class T>
 class PointerHeap
 {
     private:
-        T value;
-        PointerHeap* parent;
-        PointerHeap* leftChild;
-        PointerHeap* rightChild;
+        HeapNode<T>* root;
+        HeapNode<T>* last;
 
     public:
-        PointerHeap(T);
-        PointerHeap<T>* GetParent();
-        void Insert(PointerHeap*,PointerHeap*,bool,bool);
-        bool IsLeaf(PointerHeap*);
-        void trickleDown(PointerHeap*,PointerHeap*);
-        void DeleteMin();
+        PointerHeap();
         ~PointerHeap();
+        void Insert(T);
+        void Remove();
+
 };
