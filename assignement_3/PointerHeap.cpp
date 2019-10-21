@@ -73,6 +73,13 @@ void PointerHeap<T>::Insert(PointerHeap* actualNode, PointerHeap* nodeToAdd, boo
 //     }
 // }
 
+// template<typename T> 
+// PointerHeap<T>::DeleteMin(){
+//     delete this->leftChild;
+//     delete this->rightChild;
+// }
+
+
 template<typename T> 
 PointerHeap<T>::~PointerHeap(){
     delete this->leftChild;

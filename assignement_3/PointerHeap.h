@@ -17,5 +17,6 @@ class PointerHeap
         void Insert(PointerHeap*,PointerHeap*,bool,bool);
         bool IsLeaf(PointerHeap*);
         void trickleDown(PointerHeap*,PointerHeap*);
+        void DeleteMin();
         ~PointerHeap();
 };

@@ -33,10 +33,9 @@ void insertionSort(int* arr, int length){
     }
 }
 
-double* measureInsertion(){
+void measureInsertion(double* execTimes){
     int i = 0;
-    double execTimes[6] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
-    while (i < 30){
+    while (i < 1){
         int startSize = 10;
         int pow = 1;
         while(startSize <= 1000000){
@@ -45,6 +44,7 @@ double* measureInsertion(){
             insertionSort(arr, startSize);
             auto end = high_resolution_clock::now();
             std::chrono::duration<double> elapsed = end - start;
+            cout << elapsed.count() << endl;
             execTimes[pow-1] += elapsed.count();
             startSize *= 10;
             pow++;
@@ -53,8 +53,7 @@ double* measureInsertion(){
     }
     for (int j = 0; j < 6; j++){
         execTimes[j] /= 30;
-    }  
-    return execTimes;
+    }
 }
 
 
@@ -95,6 +94,8 @@ int* merge(int* left, int lSize, int* right, int rSize){
         ri++;
         i++;
     }
+    delete[] left;
+    delete[] right;
     return res;
     
 }
@@ -105,13 +106,13 @@ int* mergeSort(int* arr, int length){
     int mid = length / 2;
     int* leftPart = mergeSort(split(arr, 0, mid-1), mid);
     int* rightPart = mergeSort(split(arr, mid, length-1), length-mid);
+    delete[] arr;
     return merge(leftPart, mid, rightPart, length-mid);
 }
 
 
-double* measureMerge(){
+void measureMerge(double* execTimes){
     int i = 0;
-    double execTimes[6] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
     while (i < 30){
         int startSize = 10;
         int pow = 1;
@@ -119,6 +120,7 @@ double* measureMerge(){
             int* arr = generateRandomArray(startSize);
             auto start = high_resolution_clock::now();
             arr = mergeSort(arr, startSize);
+            delete[] arr;
             auto end = high_resolution_clock::now();
             std::chrono::duration<double> elapsed = end - start;
             execTimes[pow-1] += elapsed.count();
@@ -129,8 +131,7 @@ double* measureMerge(){
     }
     for (int j = 0; j < 6; j++){
         execTimes[j] /= 30;
-    }  
-    return execTimes;
+    }
 }
 
 void swap(int* a, int* b){
@@ -165,9 +166,8 @@ void quickSort(int* arr, int lo, int hi){
 }
 
 
-double* measureQuick(){
+void measureQuick(double* execTimes){
     int i = 0;
-    double execTimes[6] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
     while (i < 30){
         int startSize = 10;
         int pow = 1;
@@ -186,7 +186,6 @@ double* measureQuick(){
     for (int j = 0; j < 6; j++){
         execTimes[j] /= 30;
     }  
-    return execTimes;
 }
 
 void trickleDown(int* arr, int start, int end){
@@ -232,9 +231,8 @@ void heapSort(int* arr, int length){
 }
 
 
-double* measureHeap(){
+void measureHeap(double* execTimes){
     int i = 0;
-    double execTimes[6] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
     while (i < 30){
         int startSize = 10;
         int pow = 1;
@@ -252,6 +250,5 @@ double* measureHeap(){
     }
     for (int j = 0; j < 6; j++){
         execTimes[j] /= 30;
-    }  
-    return execTimes;
+    }
 }
