@@ -4,6 +4,7 @@
 #include <time.h>
 #include "Sort.h"
 #include "PointerHeap.cpp"
+#include "IntCell.h"
 
 using std::cin;
 using std::cout;
@@ -35,23 +36,25 @@ void Exercise2(){
 }
 
 void Exercise1(){
-  PointerHeap<int> *root = new PointerHeap<int>(0);
-  PointerHeap<int> *lastChild = root;
-  PointerHeap<int> *pth1 = new PointerHeap<int>(1);
-  root->Insert(lastChild,pth1,false,false);
-  lastChild = pth1;
-  PointerHeap<int> *pth2 = new PointerHeap<int>(2);
-  root->Insert(lastChild,pth2,false,false);
-  lastChild = pth2;
-  PointerHeap<int> *pth3 = new PointerHeap<int>(3);
-  root->Insert(lastChild,pth3,false,false);
-  lastChild = pth3;
-  PointerHeap<int> *pth4 = new PointerHeap<int>(4);
-  root->Insert(lastChild,pth4,false,false);
-  lastChild = pth4;
-  PointerHeap<int> *pth5 = new PointerHeap<int>(5);
-  root->Insert(lastChild,pth5,false,false);
-  lastChild = pth5;
+  PointerHeap<IntCell>* heap = new PointerHeap<IntCell>();
+  heap->Insert(*new IntCell(0));
+  heap->Insert(*new IntCell(1));
+  heap->Insert(*new IntCell(2));
+  heap->Insert(*new IntCell(3));
+  heap->Insert(*new IntCell(4));
+  heap->Insert(*new IntCell(11));
+  heap->Insert(*new IntCell(12));
+  heap->Insert(*new IntCell(13));
+  heap->Insert(*new IntCell(14));
+  heap->Insert(*new IntCell(15));
+  heap->Insert(*new IntCell(5));
+  heap->Insert(*new IntCell(6));
+  heap->Insert(*new IntCell(7));
+  heap->Insert(*new IntCell(8));
+  heap->Insert(*new IntCell(9));
+  heap->Insert(*new IntCell(10));
+
+  heap->Remove();
 }
 
 int main()
