@@ -12,7 +12,9 @@ class PointerHeap
     public:
         PointerHeap();
         ~PointerHeap();
+        HeapNode<T>* GetRoot();
+        HeapNode<T>* GetLast();
         void Insert(T);
-        void Remove();
+        void DeleteMin();
 
 };

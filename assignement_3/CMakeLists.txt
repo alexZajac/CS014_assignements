@@ -5,12 +5,14 @@ ADD_SUBDIRECTORY(googletest)
 SET(CMAKE_CXX_STANDARD 11)
 
 ADD_EXECUTABLE(main
-    PriorityQueue.cpp
+    HeapNode.cpp
+    Sort.cpp
     main.cpp
 )
 
 ADD_EXECUTABLE(test
-    PriorityQueue.cpp
+    HeapNode.cpp
+    Sort.cpp
     test.cpp
 )
 

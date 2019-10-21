@@ -19,6 +19,26 @@ HeapNode<T>* HeapNode<T>::GetParent(){
 }
 
 template<typename T> 
+HeapNode<T>* HeapNode<T>::GetLeftChild(){
+    return this->leftChild;
+}
+
+template<typename T> 
+HeapNode<T>* HeapNode<T>::GetRightChild(){
+    return this->rightChild;
+}
+
+template<typename T> 
+HeapNode<T>* HeapNode<T>::GetPrevious(){
+    return this->previous;
+}
+
+template<typename T> 
+T HeapNode<T>::GetValue(){
+    return this->value;
+}
+
+template<typename T> 
 bool HeapNode<T>::IsLeaf(){
     return this->leftChild == nullptr && this->rightChild == nullptr;
 }
@@ -89,20 +109,16 @@ void HeapNode<T>::Insert(HeapNode* toInsert, HeapNode** root, HeapNode** last){
 
     //toogle up
     HeapNode* tup = *last;
-    while(tup->parent != *root && tup->parent->value > tup->value){
+    while(tup->parent != nullptr && tup->parent->value > tup->value){
           T temp = tup->value;
           tup->value = tup->parent->value;
           tup->parent->value = temp;
-    }
-    if(tup->parent == *root && (*root)->value > tup->value){
-          T temp = tup->value;
-          tup->value = (*root)->value;
-          (*root)->value = temp;
+          tup = tup->parent;
     }
 }
 
 template<typename T> 
-void HeapNode<T>::Remove(HeapNode** root, HeapNode** last){
+void HeapNode<T>::DeleteMin(HeapNode** root, HeapNode** last){
     if(*root == nullptr) return;
     if(!(*root)->IsLeaf()){
         (*root)->value = (*last)->value;

@@ -1,245 +1,232 @@
-#include "PriorityQueue.h"
-#include "DoubleStack.h";
-#include "gtest/gtest.h";
+#include "Sort.h"
+#include "PointerHeap.cpp"
+#include "IntCell.h"
+#include "gtest/gtest.h"
 using std::string;
 
-TEST(PriorityQueueTest, EnqueueEmpty)
+TEST(PointerHeap, EmptyHeap)
 {
-    PriorityQueue *dummyHead = new PriorityQueue(-1);
-    PriorityQueue *newNode = new PriorityQueue(12);
-    dummyHead->Enqueue(newNode);
-    EXPECT_EQ(dummyHead->GetNext(), newNode);
+    PointerHeap<IntCell>* heap = new PointerHeap<IntCell>();
+    EXPECT_EQ(heap->GetLast(), nullptr);
+    EXPECT_EQ(heap->GetRoot(), nullptr);
 }
 
-TEST(PriorityQueueTest, DequeueEmpty)
+TEST(PointerHeap, OneNodeHeap)
 {
-    PriorityQueue *dummyHead = new PriorityQueue(-1);
-    testing::internal::CaptureStdout();
-    dummyHead->Dequeue();
-    string output = testing::internal::GetCapturedStdout();
-    EXPECT_EQ(output, "List is empty.\n");
+    PointerHeap<IntCell>* heap = new PointerHeap<IntCell>();
+    heap->Insert(*new IntCell(0));
+    EXPECT_EQ(heap->GetLast(), heap->GetRoot());
 }
 
-TEST(PriorityQueueTest, HasPriority)
+TEST(PointerHeap, TwoNodeLastHeap)
 {
-    PriorityQueue *dummyHead = new PriorityQueue(-1);
-    PriorityQueue *newNode1 = new PriorityQueue(1);
-    PriorityQueue *newNode2 = new PriorityQueue(2);
-    PriorityQueue *newNode3 = new PriorityQueue(1);
-    dummyHead->Enqueue(newNode1);
-    dummyHead->Enqueue(newNode2);
-    dummyHead->Enqueue(newNode3);
-    const PriorityQueue *toTest = dummyHead->GetNext();
-    EXPECT_EQ(toTest, newNode3);
+    PointerHeap<IntCell>* heap = new PointerHeap<IntCell>();
+    heap->Insert(*new IntCell(0));
+    heap->Insert(*new IntCell(1));
+    EXPECT_EQ(heap->GetLast()->GetPrevious(), heap->GetRoot());
 }
 
-TEST(PriorityQueueTest, DequeueNotEmpty)
+TEST(PointerHeap, ThreeNodeParentHeap)
 {
-    PriorityQueue *dummyHead = new PriorityQueue(-1);
-    PriorityQueue *newNode1 = new PriorityQueue(1);
-    PriorityQueue *newNode2 = new PriorityQueue(2);
-    PriorityQueue *newNode3 = new PriorityQueue(1);
-    dummyHead->Enqueue(newNode1);
-    dummyHead->Enqueue(newNode2);
-    dummyHead->Enqueue(newNode3);
-    dummyHead->Dequeue();
-    EXPECT_EQ(dummyHead->GetNext(), newNode1);
+    PointerHeap<IntCell>* heap = new PointerHeap<IntCell>();
+    heap->Insert(*new IntCell(0));
+    heap->Insert(*new IntCell(1));
+    heap->Insert(*new IntCell(2));
+    EXPECT_EQ(heap->GetLast()->GetParent(), heap->GetRoot());
+    EXPECT_EQ(heap->GetLast()->GetPrevious()->GetParent(), heap->GetRoot());
 }
 
-TEST(PriorityQueueTest, EnqueueTenthNext)
+
+TEST(PointerHeap, RootChildHeap)
 {
-    PriorityQueue *dummyHead = new PriorityQueue(-1);
-    PriorityQueue *newNode1 = new PriorityQueue(1);
-    dummyHead->Enqueue(newNode1);
-    PriorityQueue *newNode2 = new PriorityQueue(2);
-    dummyHead->Enqueue(newNode2);
-    PriorityQueue *newNode3 = new PriorityQueue(1);
-    dummyHead->Enqueue(newNode3);
-    PriorityQueue *newNode4 = new PriorityQueue(4);
-    dummyHead->Enqueue(newNode4);
-    PriorityQueue *newNode5 = new PriorityQueue(5);
-    dummyHead->Enqueue(newNode5);
-    PriorityQueue *newNode6 = new PriorityQueue(6);
-    dummyHead->Enqueue(newNode6);
-    PriorityQueue *newNode7 = new PriorityQueue(7);
-    dummyHead->Enqueue(newNode7);
-    PriorityQueue *newNode8 = new PriorityQueue(8);
-    dummyHead->Enqueue(newNode8);
-    PriorityQueue *newNode9 = new PriorityQueue(9);
-    dummyHead->Enqueue(newNode9);
-    PriorityQueue *newNode10 = new PriorityQueue(10);
-    dummyHead->Enqueue(newNode10);
-    PriorityQueue *newNode11 = new PriorityQueue(11);
-    dummyHead->Enqueue(newNode11);
-    const PriorityQueue *toTest = dummyHead->GetNext();
-    EXPECT_EQ(toTest->GetTenthNext(), newNode11);
+    PointerHeap<IntCell>* heap = new PointerHeap<IntCell>();
+    heap->Insert(*new IntCell(0));
+    heap->Insert(*new IntCell(1));
+    heap->Insert(*new IntCell(2));
+    heap->Insert(*new IntCell(3));
+    heap->Insert(*new IntCell(4));
+    heap->Insert(*new IntCell(5));
+    heap->Insert(*new IntCell(6));
+    heap->Insert(*new IntCell(7));
+    heap->Insert(*new IntCell(8));
+    EXPECT_EQ(heap->GetRoot()->GetLeftChild()->GetLeftChild()->GetRightChild(), heap->GetLast());
 }
 
-TEST(PriorityQueueTest, EnqueueHighPriorityTenthNext)
+TEST(PointerHeap, RootValueHeap)
 {
-    PriorityQueue *dummyHead = new PriorityQueue(-1);
-    PriorityQueue *newNode1 = new PriorityQueue(1);
-    dummyHead->Enqueue(newNode1);
-    PriorityQueue *newNode2 = new PriorityQueue(2);
-    dummyHead->Enqueue(newNode2);
-    PriorityQueue *newNode3 = new PriorityQueue(1);
-    dummyHead->Enqueue(newNode3);
-    PriorityQueue *newNode4 = new PriorityQueue(4);
-    dummyHead->Enqueue(newNode4);
-    PriorityQueue *newNode5 = new PriorityQueue(5);
-    dummyHead->Enqueue(newNode5);
-    PriorityQueue *newNode6 = new PriorityQueue(6);
-    dummyHead->Enqueue(newNode6);
-    PriorityQueue *newNode7 = new PriorityQueue(7);
-    dummyHead->Enqueue(newNode7);
-    PriorityQueue *newNode8 = new PriorityQueue(8);
-    dummyHead->Enqueue(newNode8);
-    PriorityQueue *newNode9 = new PriorityQueue(9);
-    dummyHead->Enqueue(newNode9);
-    PriorityQueue *newNode10 = new PriorityQueue(10);
-    dummyHead->Enqueue(newNode10);
-    PriorityQueue *newNode11 = new PriorityQueue(11);
-    dummyHead->Enqueue(newNode11);
-    PriorityQueue *newNode12 = new PriorityQueue(4);
-    dummyHead->Enqueue(newNode12);
-    const PriorityQueue *toTest = dummyHead->GetNext();
-    EXPECT_EQ(toTest->GetTenthNext(), newNode10);
+    PointerHeap<IntCell>* heap = new PointerHeap<IntCell>();
+    heap->Insert(*new IntCell(10));
+    heap->Insert(*new IntCell(24));
+    heap->Insert(*new IntCell(2));
+    heap->Insert(*new IntCell(7));
+    heap->Insert(*new IntCell(1));
+    heap->Insert(*new IntCell(8));
+    heap->Insert(*new IntCell(14));
+    heap->Insert(*new IntCell(69));
+    heap->Insert(*new IntCell(9));
+    heap->Insert(*new IntCell(24));
+    heap->Insert(*new IntCell(32));
+    heap->Insert(*new IntCell(16));
+    heap->Insert(*new IntCell(8));
+    heap->Insert(*new IntCell(29));
+    heap->Insert(*new IntCell(5));
+    heap->Insert(*new IntCell(4));
+    IntCell* foo = new IntCell(0);
+    heap->Insert(*foo);
+    heap->Insert(*new IntCell(28));
+    EXPECT_EQ(heap->GetRoot()->GetValue().getValue(),foo->getValue());
 }
 
-TEST(PriorityQueueTest, DequeueTenthNext)
+TEST(PointerHeap, RootValueWithRemoveHeap)
 {
-    PriorityQueue *dummyHead = new PriorityQueue(-1);
-    PriorityQueue *newNode1 = new PriorityQueue(1);
-    dummyHead->Enqueue(newNode1);
-    PriorityQueue *newNode2 = new PriorityQueue(2);
-    dummyHead->Enqueue(newNode2);
-    PriorityQueue *newNode3 = new PriorityQueue(1);
-    dummyHead->Enqueue(newNode3);
-    PriorityQueue *newNode4 = new PriorityQueue(4);
-    dummyHead->Enqueue(newNode4);
-    PriorityQueue *newNode5 = new PriorityQueue(5);
-    dummyHead->Enqueue(newNode5);
-    PriorityQueue *newNode6 = new PriorityQueue(6);
-    dummyHead->Enqueue(newNode6);
-    PriorityQueue *newNode7 = new PriorityQueue(7);
-    dummyHead->Enqueue(newNode7);
-    PriorityQueue *newNode8 = new PriorityQueue(8);
-    dummyHead->Enqueue(newNode8);
-    PriorityQueue *newNode9 = new PriorityQueue(9);
-    dummyHead->Enqueue(newNode9);
-    PriorityQueue *newNode10 = new PriorityQueue(10);
-    dummyHead->Enqueue(newNode10);
-    PriorityQueue *newNode11 = new PriorityQueue(11);
-    dummyHead->Enqueue(newNode11);
-    PriorityQueue *newNode12 = new PriorityQueue(4);
-    dummyHead->Enqueue(newNode12);
-    dummyHead->Dequeue();
-    const PriorityQueue *toTest = dummyHead->GetNext();
-    EXPECT_EQ(toTest->GetTenthNext(), newNode11);
+    PointerHeap<IntCell>* heap = new PointerHeap<IntCell>();
+    heap->Insert(*new IntCell(10));
+    heap->Insert(*new IntCell(24));
+    IntCell* foo = new IntCell(2);
+    heap->Insert(*foo);
+    heap->Insert(*new IntCell(2));
+    heap->Insert(*new IntCell(7));
+    heap->Insert(*new IntCell(1));
+    heap->Insert(*new IntCell(8));
+    heap->Insert(*new IntCell(14));
+    heap->Insert(*new IntCell(69));
+    heap->Insert(*new IntCell(9));
+    heap->Insert(*new IntCell(24));
+    heap->Insert(*new IntCell(32));
+    heap->Insert(*new IntCell(16));
+    heap->Insert(*new IntCell(8));
+    heap->Insert(*new IntCell(29));
+    heap->Insert(*new IntCell(5));
+    heap->Insert(*new IntCell(4));
+    heap->Insert(*new IntCell(0));
+    heap->Insert(*new IntCell(28));
+    heap->DeleteMin();
+    heap->DeleteMin();
+    EXPECT_EQ(heap->GetRoot()->GetValue().getValue(),foo->getValue());
 }
 
-TEST(DoubleStackTest, EmptyFirstStack)
+
+TEST(PointerHeap, InsertRemoveHeap)
 {
-    DoubleStack<int> dStack;
-    dStack.pushSecond(2);
-    EXPECT_EQ(dStack.emptyFirst(), true);
+    PointerHeap<IntCell>* heap = new PointerHeap<IntCell>();
+    heap->Insert(*new IntCell(10));
+    heap->Insert(*new IntCell(24));
+    heap->Insert(*new IntCell(2));
+    heap->DeleteMin();
+    heap->DeleteMin();
+    heap->DeleteMin();
+    EXPECT_EQ(heap->GetLast(), nullptr);
+    EXPECT_EQ(heap->GetRoot(), nullptr);
 }
 
-TEST(DoubleStackTest, EmptySecondStack)
+TEST(PointerHeap, RemoveEmptyHeap)
 {
-    DoubleStack<int> dStack;
-    dStack.pushFirst(2);
-    EXPECT_EQ(dStack.emptySecond(), true);
+    PointerHeap<IntCell>* heap = new PointerHeap<IntCell>();
+    heap->DeleteMin();
+    heap->DeleteMin();
+    heap->DeleteMin();
+    heap->DeleteMin();
+    heap->DeleteMin();
+    heap->DeleteMin();
+    EXPECT_EQ(heap->GetLast(), nullptr);
+    EXPECT_EQ(heap->GetRoot(), nullptr);
 }
 
-TEST(DoubleStackTest, PeekFirstStack)
+TEST(Sorting, CheckIfSortingMergeSort)
 {
-    DoubleStack<int> dStack;
-    dStack.pushSecond(2);
-    dStack.pushFirst(2);
-    dStack.pushFirst(7);
-    EXPECT_EQ(dStack.peekFirst(), 7);
-}
-
-TEST(DoubleStackTest, PeekDefaultSecondStack)
-{
-    DoubleStack<int> dStack;
-    dStack.pushFirst(2);
-    dStack.pushFirst(7);
-    EXPECT_EQ(dStack.peekSecond(), int());
-}
-
-TEST(DoubleStackTest, DoubleArrayFirstElt)
-{
-    DoubleStack<int> dStack;
-    dStack.pushSecond(2);
-    EXPECT_EQ(dStack.GetSize(), 3);
-}
-
-TEST(DoubleStackTest, DoubleArray)
-{
-    DoubleStack<int> dStack;
-    dStack.pushFirst(2);
-    dStack.pushSecond(2);
-    EXPECT_EQ(dStack.GetSize(), 6);
-}
-
-TEST(DoubleStackTest, PushFirst)
-{
-    DoubleStack<int> dStack;
-    dStack.pushFirst(2);
-    dStack.pushFirst(4);
-    dStack.pushSecond(7);
-    const int *toTest = dStack.GetData();
-    int defaultInt = int();
-    int arrayCompare[6] = {2, 4, defaultInt, defaultInt, defaultInt, 7};
-    int *toCompare = arrayCompare;
-    EXPECT_EQ(dStack.GetSize(), 6);
-    for (int i = 0; i < 6; ++i)
-    {
-        EXPECT_EQ(*(toTest + i), *(toCompare + i));
+    int count = 0;
+    while (count < 10)
+    {    
+        int startSize = 1000000;
+        int* arr = generateRandomArray(startSize);
+        arr = mergeSort(arr, startSize);
+        for (int i = 0; i < startSize-1; i++)
+        {
+            ASSERT_LE(arr[i], arr[i+1]);
+        }
+        delete[] arr;
+        count++;
     }
 }
 
-TEST(DoubleStackTest, PushSecond)
+TEST(Sorting, SortingOneMergeSort)
 {
-    DoubleStack<char> dStack;
-    dStack.pushFirst('2');
-    dStack.pushFirst('3');
-    dStack.pushFirst('4');
-    dStack.pushSecond('4');
-    dStack.pushSecond('7');
-    dStack.pushSecond('8');
-    dStack.pushSecond('9');
-    char defaultChar = char();
-    const char *toTest = dStack.GetData();
-    int arrayCompare[12] = {'2', '3', '4', defaultChar, defaultChar, defaultChar, defaultChar, defaultChar, '9', '8', '7', '4'};
-    int *toCompare = arrayCompare;
-    EXPECT_EQ(dStack.GetSize(), 12);
-    for (int i = 0; i < 12; ++i)
-    {
-        EXPECT_EQ(*(toTest + i), *(toCompare + i));
+    int startSize = 1;
+    int* arr = generateRandomArray(startSize);
+    arr = mergeSort(arr, startSize);
+    delete[] arr;
+}
+
+TEST(Sorting, SortingOddMergeSort)
+{
+    int startSize = 111111;
+    int* arr = generateRandomArray(startSize);
+    arr = mergeSort(arr, startSize);
+    delete[] arr;
+}
+
+TEST(Sorting, SortingEvenMergeSort)
+{
+    int startSize = 111110;
+    int* arr = generateRandomArray(startSize);
+    arr = mergeSort(arr, startSize);
+    delete[] arr;
+}
+
+TEST(Sorting, CheckIfSortingQuickSort)
+{    
+    int count = 0;
+    while (count < 10)
+    {    
+        int startSize = 1000000;
+        int* arr = generateRandomArray(startSize);
+        quickSort(arr, 0, startSize-1);
+        for (int i = 0; i < startSize-1; i++)
+        {
+            ASSERT_LE(arr[i], arr[i+1]);
+        }
+        delete[] arr;
+        count++;
     }
+    
 }
 
-TEST(DoubleStackTest, PopFirst)
+TEST(Sorting, CheckIfSortingHeapSort)
 {
-    DoubleStack<int> dStack;
-    dStack.pushFirst(2);
-    dStack.pushSecond(2);
-    dStack.popFirst();
-    EXPECT_EQ(dStack.GetFirstSize(), 0);
+    int count = 0;
+    while (count < 10)
+    {    
+        int startSize = 1000000;
+        int* arr = generateRandomArray(startSize);
+        heapSort(arr,startSize);
+        for (int i = 0; i < startSize-1; i++)
+        {
+            ASSERT_LE(arr[i], arr[i+1]);
+        }
+        delete[] arr;
+        count++;
+    }
+    
 }
 
-TEST(DoubleStackTest, PopSecond)
+TEST(Sorting, CheckIfSortingInsertionSort)
 {
-    DoubleStack<int> dStack;
-    dStack.pushFirst(2);
-    dStack.pushSecond(2);
-    dStack.pushSecond(4);
-    dStack.popSecond();
-    EXPECT_EQ(dStack.GetSecondSize(), 1);
+    int count = 0;
+    while (count < 10)
+    {    
+        int startSize = 10000;
+        int* arr = generateRandomArray(startSize);
+        insertionSort(arr, startSize);
+        for (int i = 0; i < startSize-1; i++)
+        {
+            ASSERT_LE(arr[i], arr[i+1]);
+        }
+        delete[] arr;
+        count++;
+    }
+    
 }
+
 
 int main(int argc, char **argv)
 {

@@ -6,5 +6,5 @@ CXX_FLAGS =   -std=gnu++11
 
 CXX_DEFINES = -Dgtest_disable_pthreads=ON
 
-CXX_INCLUDES = -isystem "/mnt/c/Users/Alexandre Zajac/Desktop/Programmation/Training/CS014/assignements/assignement_2/googletest/googletest/include" -isystem "/mnt/c/Users/Alexandre Zajac/Desktop/Programmation/Training/CS014/assignements/assignement_2/googletest/googletest" 
+CXX_INCLUDES = -isystem /mnt/c/Users/Med/Documents/Cours/A4/Data/CS014_assignements/assignement_3/googletest/googletest/include -isystem /mnt/c/Users/Med/Documents/Cours/A4/Data/CS014_assignements/assignement_3/googletest/googletest 
 

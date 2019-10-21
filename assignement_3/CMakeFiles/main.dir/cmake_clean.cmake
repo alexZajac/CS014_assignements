@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/main.dir/PriorityQueue.cpp.o"
+  "CMakeFiles/main.dir/HeapNode.cpp.o"
+  "CMakeFiles/main.dir/Sort.cpp.o"
   "CMakeFiles/main.dir/main.cpp.o"
   "main.pdb"
   "main"

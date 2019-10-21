@@ -215,16 +215,16 @@ void buildHeap(int* arr, int length){
     // start with parent
     int start = (length-1) / 2;
     while (start >= 0){
-        trickleDown(arr, start, length-1);
+        trickleDown(arr, start, length);
         start--;
     }
 }
 
 void heapSort(int* arr, int length){
     buildHeap(arr, length);
-    int end = length - 1;
-    while (end > 0){
-        swap(&arr[0], &arr[end]);
+    int end = length;
+    while (end > 1){
+        swap(&arr[0], &arr[end-1]);
         --end;
         trickleDown(arr, 0, end);
     }

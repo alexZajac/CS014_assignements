@@ -6,41 +6,67 @@
 
 #IncludeRegexTransform: 
 
-/mnt/c/Users/Alexandre Zajac/Desktop/Programmation/Training/CS014/assignements/assignement_2/DoubleStack.h
-DoubleStack.h
-/mnt/c/Users/Alexandre Zajac/Desktop/Programmation/Training/CS014/assignements/assignement_2/DoubleStack.h
+/mnt/c/Users/Med/Documents/Cours/A4/Data/CS014_assignements/assignement_3/HeapNode.cpp
+HeapNode.h
+/mnt/c/Users/Med/Documents/Cours/A4/Data/CS014_assignements/assignement_3/HeapNode.h
 iostream
--
-string
--
-vector
 -
 
-/mnt/c/Users/Alexandre Zajac/Desktop/Programmation/Training/CS014/assignements/assignement_2/PriorityQueue.cpp
+/mnt/c/Users/Med/Documents/Cours/A4/Data/CS014_assignements/assignement_3/HeapNode.h
 iostream
--
-string
--
-vector
--
-PriorityQueue.h
-/mnt/c/Users/Alexandre Zajac/Desktop/Programmation/Training/CS014/assignements/assignement_2/PriorityQueue.h
-
-/mnt/c/Users/Alexandre Zajac/Desktop/Programmation/Training/CS014/assignements/assignement_2/PriorityQueue.h
-iostream
--
-string
--
-vector
 -
 
-/mnt/c/Users/Alexandre Zajac/Desktop/Programmation/Training/CS014/assignements/assignement_2/main.cpp
+/mnt/c/Users/Med/Documents/Cours/A4/Data/CS014_assignements/assignement_3/IntCell.h
+
+/mnt/c/Users/Med/Documents/Cours/A4/Data/CS014_assignements/assignement_3/PointerHeap.cpp
+HeapNode.cpp
+/mnt/c/Users/Med/Documents/Cours/A4/Data/CS014_assignements/assignement_3/HeapNode.cpp
+PointerHeap.h
+/mnt/c/Users/Med/Documents/Cours/A4/Data/CS014_assignements/assignement_3/PointerHeap.h
+iostream
+-
+
+/mnt/c/Users/Med/Documents/Cours/A4/Data/CS014_assignements/assignement_3/PointerHeap.h
+iostream
+-
+
+/mnt/c/Users/Med/Documents/Cours/A4/Data/CS014_assignements/assignement_3/Sort.cpp
 iostream
 -
 string
 -
 vector
 -
-DoubleStack.h
-/mnt/c/Users/Alexandre Zajac/Desktop/Programmation/Training/CS014/assignements/assignement_2/DoubleStack.h
+time.h
+-
+chrono
+-
+Sort.h
+/mnt/c/Users/Med/Documents/Cours/A4/Data/CS014_assignements/assignement_3/Sort.h
+
+/mnt/c/Users/Med/Documents/Cours/A4/Data/CS014_assignements/assignement_3/Sort.h
+iostream
+-
+string
+-
+vector
+-
+chrono
+-
+
+/mnt/c/Users/Med/Documents/Cours/A4/Data/CS014_assignements/assignement_3/main.cpp
+iostream
+-
+string
+-
+vector
+-
+time.h
+-
+Sort.h
+/mnt/c/Users/Med/Documents/Cours/A4/Data/CS014_assignements/assignement_3/Sort.h
+PointerHeap.cpp
+/mnt/c/Users/Med/Documents/Cours/A4/Data/CS014_assignements/assignement_3/PointerHeap.cpp
+IntCell.h
+/mnt/c/Users/Med/Documents/Cours/A4/Data/CS014_assignements/assignement_3/IntCell.h
 

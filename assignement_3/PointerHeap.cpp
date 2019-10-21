@@ -13,7 +13,18 @@ PointerHeap<T>::PointerHeap(){
 
 template<typename T> 
 PointerHeap<T>::~PointerHeap(){
-    //TODO
+    delete this->root;
+    delete this->last;
+}
+
+template<typename T> 
+HeapNode<T>* PointerHeap<T>::GetRoot(){
+    return this->root;
+}
+
+template<typename T> 
+HeapNode<T>* PointerHeap<T>::GetLast(){
+    return this->last;
 }
 
 template<typename T> 
@@ -23,7 +34,7 @@ void PointerHeap<T>::Insert(T data){
 }
 
 template<typename T> 
-void PointerHeap<T>::Remove(){
-    this->root->Remove(&this->root,&this->last);
+void PointerHeap<T>::DeleteMin(){
+    this->root->DeleteMin(&this->root,&this->last);
 }
 

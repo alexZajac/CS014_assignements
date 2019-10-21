@@ -14,9 +14,13 @@ class HeapNode
 
     public:
         HeapNode(T);
+        T GetValue();
         HeapNode<T>* GetParent();
+        HeapNode<T>* GetLeftChild();
+        HeapNode<T>* GetRightChild();
+        HeapNode<T>* GetPrevious();
         void Insert(HeapNode*, HeapNode**, HeapNode**);
-        void Remove(HeapNode**, HeapNode**);
+        void DeleteMin(HeapNode**, HeapNode**);
         bool IsLeaf();
         void trickleDown(HeapNode*);
         ~HeapNode();

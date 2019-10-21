@@ -45,28 +45,30 @@ void Exercise2(){
 
 void Exercise1(){
   PointerHeap<IntCell>* heap = new PointerHeap<IntCell>();
-  heap->Insert(*new IntCell(0));
-  heap->Insert(*new IntCell(1));
-  heap->Insert(*new IntCell(2));
-  heap->Insert(*new IntCell(3));
-  heap->Insert(*new IntCell(4));
-  heap->Insert(*new IntCell(11));
-  heap->Insert(*new IntCell(12));
-  heap->Insert(*new IntCell(13));
-  heap->Insert(*new IntCell(14));
-  heap->Insert(*new IntCell(15));
-  heap->Insert(*new IntCell(5));
-  heap->Insert(*new IntCell(6));
-  heap->Insert(*new IntCell(7));
-  heap->Insert(*new IntCell(8));
-  heap->Insert(*new IntCell(9));
-  heap->Insert(*new IntCell(10));
+    heap->Insert(*new IntCell(10));
+    heap->Insert(*new IntCell(24));
+    heap->Insert(*new IntCell(2));
+    heap->Insert(*new IntCell(7));
+    heap->Insert(*new IntCell(1));
+    heap->Insert(*new IntCell(8));
+    heap->Insert(*new IntCell(14));
+    heap->Insert(*new IntCell(69));
+    heap->Insert(*new IntCell(9));
+    heap->Insert(*new IntCell(24));
+    heap->Insert(*new IntCell(32));
+    heap->Insert(*new IntCell(16));
+    heap->Insert(*new IntCell(8));
+    heap->Insert(*new IntCell(29));
+    heap->Insert(*new IntCell(5));
+    heap->Insert(*new IntCell(4));
+    heap->Insert(*new IntCell(0));
+    heap->Insert(*new IntCell(28));
 
-  heap->Remove();
+  heap->DeleteMin();
 }
 
 int main()
 {
-  Exercise2();
+  Exercise1();
   system("pause");
 }
