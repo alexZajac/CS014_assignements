@@ -191,6 +191,31 @@ TEST(Sorting, CheckIfSortingQuickSort)
     
 }
 
+TEST(Sorting, SortingOneQuickSort)
+{
+    int startSize = 1;
+    int* arr = generateRandomArray(startSize);
+    quickSort(arr, 0, startSize-1);
+    delete[] arr;
+}
+
+
+TEST(Sorting, SortingOddQuickSort)
+{
+    int startSize = 111111;
+    int* arr = generateRandomArray(startSize);
+    quickSort(arr, 0, startSize-1);
+    delete[] arr;
+}
+
+TEST(Sorting, SortingEvenQuickSort)
+{
+    int startSize = 111110;
+    int* arr = generateRandomArray(startSize);
+    quickSort(arr, 0, startSize-1);
+    delete[] arr;
+}
+
 TEST(Sorting, CheckIfSortingHeapSort)
 {
     int count = 0;
@@ -207,6 +232,31 @@ TEST(Sorting, CheckIfSortingHeapSort)
         count++;
     }
     
+}
+
+TEST(Sorting, SortingOneHeapSort)
+{
+    int startSize = 1;
+    int* arr = generateRandomArray(startSize);
+    heapSort(arr,startSize);
+    delete[] arr;
+}
+
+
+TEST(Sorting, SortingOddHeapSort)
+{
+    int startSize = 111111;
+    int* arr = generateRandomArray(startSize);
+    heapSort(arr,startSize);
+    delete[] arr;
+}
+
+TEST(Sorting, SortingEvenHeapSort)
+{
+    int startSize = 111110;
+    int* arr = generateRandomArray(startSize);
+    heapSort(arr,startSize);
+    delete[] arr;
 }
 
 TEST(Sorting, CheckIfSortingInsertionSort)
@@ -226,6 +276,33 @@ TEST(Sorting, CheckIfSortingInsertionSort)
     }
     
 }
+
+
+TEST(Sorting, SortingOneInsertionSort)
+{
+    int startSize = 1;
+    int* arr = generateRandomArray(startSize);
+    insertionSort(arr,startSize);
+    delete[] arr;
+}
+
+
+TEST(Sorting, SortingOddInsertionSort)
+{
+    int startSize = 111111;
+    int* arr = generateRandomArray(startSize);
+    insertionSort(arr,startSize);
+    delete[] arr;
+}
+
+TEST(Sorting, SortingEvenInsertionSort)
+{
+    int startSize = 111110;
+    int* arr = generateRandomArray(startSize);
+    insertionSort(arr,startSize);
+    delete[] arr;
+}
+
 
 
 int main(int argc, char **argv)
