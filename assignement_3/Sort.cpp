@@ -35,7 +35,7 @@ void insertionSort(int* arr, int length){
 
 void measureInsertion(double* execTimes){
     int i = 0;
-    while (i < 1){
+    while (i < 30){
         int startSize = 10;
         int pow = 1;
         while(startSize <= 1000000){
