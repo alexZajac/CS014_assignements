@@ -53,6 +53,7 @@ void MyTree::preorderHelper(BinaryNode* node) const {
         preorderHelper(node->rchild);
     }
 }
+
 BinaryNode* MyTree::findMax() const { 
     return findMaxHelper(this->root);
 }
@@ -84,13 +85,13 @@ void MyTree::storeInorder(BinaryNode* node, vector<tuple<int, string>> &curr) {
     }
 }
 
-void MyTree::resetValuesInorder(vector<tuple<int, string>> &tree, BinaryNode* node){
+void MyTree::resetValuesInorder(vector<tuple<int, string>> &tree, int* currIndex, BinaryNode* node){
     if (node){
-        this->resetValuesInorder(tree, node->lchild);
-        node->myInt = get<0>(tree.at(0));
-        node->myString = get<1>(tree.at(0));
-        tree.erase(tree.begin());
-        this->resetValuesInorder(tree, node->rchild);
+        this->resetValuesInorder(tree, currIndex, node->lchild);
+        node->myInt = get<0>(tree.at(*currIndex));
+        node->myString = get<1>(tree.at(*currIndex));
+        *currIndex = *currIndex + 1;
+        this->resetValuesInorder(tree, currIndex, node->rchild);
     }
 }
 
@@ -102,5 +103,6 @@ void MyTree::makeBST() {
     // sort in ascending order
     sort(tree.begin(), tree.end());
     // store it back
-    this->resetValuesInorder(tree, this->root);
+    int start_index = 0;
+    this->resetValuesInorder(tree, &start_index, this->root);
 }

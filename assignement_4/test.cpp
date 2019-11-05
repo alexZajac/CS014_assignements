@@ -15,5 +15,6 @@ main() {
   t->makeBST();
   cout << endl;
   t->preorder();
+  BinaryNode* b = t->findMax();
   system("pause");
 }

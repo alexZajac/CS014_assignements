@@ -59,6 +59,6 @@ private:
   BinaryNode *nextInsertRoot;
 
   void storeInorder(BinaryNode*, vector<tuple<int, string>> &);
-  void resetValuesInorder(vector<tuple<int, string>> &, BinaryNode*);
+  void resetValuesInorder(vector<tuple<int, string>> &, int*, BinaryNode*);
 };
 
