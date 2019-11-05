@@ -69,6 +69,6 @@ void Exercise1(){
 
 int main()
 {
-  Exercise1();
+  Exercise2();
   system("pause");
 }
