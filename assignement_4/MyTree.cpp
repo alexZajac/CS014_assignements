@@ -29,14 +29,12 @@ void MyTree::insert(int x, string s) {
                 while(temp->parent && temp->parent->lchild != temp)
                     temp = temp->parent;
                 // left child parent not found, now temp is root, go to deepest left child
-                if(!temp->parent){
-                    while(temp->lchild)
-                        temp = temp->lchild;
-                    this->nextInsertRoot = temp;
+                if(temp->parent){
+                    temp = temp->parent->rchild;
                 }
-                // left child found
-                else
-                    this->nextInsertRoot = temp->parent->rchild->lchild;
+                while(temp->lchild)
+                    temp = temp->lchild;
+                this->nextInsertRoot = temp;
             }
         }
     }
