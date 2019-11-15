@@ -1,0 +1,15 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build ass5",
+      "type": "shell",
+      "command": "g++",
+      "args": ["-g", "-Wall", "-o", "graph", "graph.cpp"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}
