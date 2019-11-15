@@ -1,4 +1,5 @@
 #include "graph.h"
+#include<vector>
 
 
  vector<string>* Node::neighbors() {
@@ -82,7 +83,24 @@ bool Graph::IsThereTripletClique(){
  }
 
  bool Graph::isGraphConnected() {
-   
+    //Initialize connected nodes with the first node
+    vector<string> visited = vector<string>();
+    visited.push_back(this->graph->begin()->first);
+    this->graph->begin()->second->setVisited(true);
+
+    //traverse currently connected node
+    for(size_t i = 0; i < visited.size(); i++){
+      Node* node = this->graph->at(visited.at(i));
+      //Check what nodes are connected to it to add them to connected nodes
+      for(vector<Edge*>::iterator itn = node->adjacentsList()->begin();itn!=node->adjacentsList()->end();itn++) {
+        if(!(*itn)->getNode()->isVisited()){
+          visited.push_back((*itn)->getNode()->getPayload());
+          (*itn)->getNode()->setVisited(true);
+        }
+      }
+    }
+
+    return visited.size() == this->graph->size();
  }
 
  int Graph::longestSimplePath() {
@@ -99,16 +117,16 @@ int main() {
   g.addNode("b");
   g.addNode("c");
 
-  g.addEdge("a","b",10);
+  //g.addEdge("a","b",10);
   g.addEdge("b","c",5);
-  g.addEdge("c","a",9);
+  // g.addEdge("c","a",9);
 
 
   g.printGraph();
 
+  cout << g.isGraphConnected() << endl;
   cout << g.IsThereTripletClique() << endl;
   system("pause");
-
 }
 
 
