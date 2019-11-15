@@ -54,8 +54,27 @@ void Graph::printGraph() {
   }
 }
 
+bool hasOneInCommon(vector<string>* v1, vector<string>* v2){
+  for(string s1 : *v1)
+    for(string s2 : *v2)
+      if(s1==s2)
+        return true;
+  return false;
+}
+
 bool Graph::IsThereTripletClique(){
 
+  for (map<string,Node* >::iterator it=graph->begin(); it != graph->end();it++) {
+    if(it->second->neighbors()->size()>1){
+      vector<string>* neigh  = it->second->neighbors(); 
+      for(vector<string>::iterator itn=neigh->begin();itn!=neigh->end();itn++) {
+        if(hasOneInCommon(neigh,this->graph->at(*itn)->neighbors())){
+          return true;
+        }
+      }
+    }
+  }
+  return false;
 }
 
  double Graph:: GetMinDistance(string city1,string city2){
@@ -86,6 +105,9 @@ int main() {
 
 
   g.printGraph();
+
+  cout << g.IsThereTripletClique() << endl;
+  system("pause");
 
 }
 

@@ -32,7 +32,7 @@
 *.app
 
 # .vscode configurations
-/assignement_1/.vscode/**
+**/.vscode/**
 **/**.docx
 **/**.zip
 **/*.zip
