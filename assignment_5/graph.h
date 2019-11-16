@@ -14,24 +14,33 @@ class Edge;
 // payload: string
 // adjacents: vector<Edge*>
 
+
 class Node {
 public:
- Node(const string& elem):payload(elem),visited(false){ 
+ Node(const string& elem):payload(elem),visited(false),min_distance(INT16_MAX),predShort(0){ 
     adjacents = new vector<Edge* >();
   };
   ~Node() {};
   void   setVisited(bool v)        {visited = v;};
-  bool    isVisited()              {return visited;};
+  void   setMinDistance(double d)  {min_distance = d;};
+  void   setPredShort(Node * n)    {predShort = n;};
+  bool   isVisited()               {return visited;};
   void   addEdge(Edge* e)    {
     adjacents->push_back(e);
   };
+  // operator overloading for minPQ
+  bool operator< (Node* n)         {return this->min_distance < n->min_distance;};
   int    degree()  const           {return adjacents->size();};
   string getPayload() const        {return payload;}
+  double getMinDistance() const    {return min_distance;};
+  Node* getPredShort() const       {return predShort;};
   vector<string>*  neighbors();
-  vector<Edge* >*  adjacentsList()     {return adjacents;};
+  vector<Edge* >*  adjacentsList() {return adjacents;};
 private:
   string        payload;
   bool          visited;
+  double      min_distance;
+  Node*       predShort;
   vector<Edge* >* adjacents;
 };
 
@@ -55,7 +64,7 @@ private:
 class Graph {
 public:
   Graph(bool directed):directed(directed){
-    graph = new map<string,Node*>();
+    graph = new map<string, Node*>();
   };
 
   ~Graph() {
@@ -78,4 +87,6 @@ private:
   bool IsThereTripletClique(Node*, Node*, int);
   map<string,Node*>* graph;
   bool directed;
+  // helper 
+  void DijkstraShortest(Node*);
 };
