@@ -75,6 +75,7 @@ public:
 
   
 private:
+  bool IsThereTripletClique(Node*, Node*, int);
   map<string,Node*>* graph;
   bool directed;
 };

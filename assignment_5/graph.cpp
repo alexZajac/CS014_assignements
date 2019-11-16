@@ -54,26 +54,45 @@ void Graph::printGraph() {
   }
 }
 
-bool hasOneInCommon(vector<string>* v1, vector<string>* v2){
-  for(string s1 : *v1)
-    for(string s2 : *v2)
-      if(s1==s2)
+// bool hasOneInCommon(vector<string>* v1, vector<string>* v2){
+//   for(string s1 : *v1)
+//     for(string s2 : *v2)
+//       if(s1==s2)
+//         return true;
+//   return false;
+// }
+
+// bool Graph::IsThereTripletClique(){
+
+//   for (map<string,Node* >::iterator it=graph->begin(); it != graph->end();it++) {
+//     if(it->second->neighbors()->size()>1){
+//       vector<string>* neigh  = it->second->neighbors(); 
+//       for(vector<string>::iterator itn=neigh->begin();itn!=neigh->end();itn++) {
+//         if(hasOneInCommon(neigh,this->graph->at(*itn)->neighbors())){
+//           return true;
+//         }
+//       }
+//     }
+//   }
+//   return false;
+// }
+
+bool Graph::IsThereTripletClique(Node* origin, Node* current,int depth){
+
+  if(depth >3) return false;
+  else if(depth == 3) return current == origin;
+  else{
+    for (vector<Edge*>::iterator it=current->adjacentsList()->begin(); it != current->adjacentsList()->end();it++)
+      if(IsThereTripletClique(origin,(*it)->getNode(),depth+1))
         return true;
-  return false;
+    return false;
+  }
 }
 
 bool Graph::IsThereTripletClique(){
-
-  for (map<string,Node* >::iterator it=graph->begin(); it != graph->end();it++) {
-    if(it->second->neighbors()->size()>1){
-      vector<string>* neigh  = it->second->neighbors(); 
-      for(vector<string>::iterator itn=neigh->begin();itn!=neigh->end();itn++) {
-        if(hasOneInCommon(neigh,this->graph->at(*itn)->neighbors())){
-          return true;
-        }
-      }
-    }
-  }
+  for (map<string,Node* >::iterator it=graph->begin(); it != graph->end();it++)
+    if(this->IsThereTripletClique(it->second,it->second,0))
+      return true;
   return false;
 }
 
@@ -99,7 +118,7 @@ int main() {
   g.addNode("b");
   g.addNode("c");
 
-  g.addEdge("a","b",10);
+  //g.addEdge("a","b",10);
   g.addEdge("b","c",5);
   g.addEdge("c","a",9);
 
