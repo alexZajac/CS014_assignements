@@ -1,3 +1,5 @@
+#ifndef __GRAPH_H__
+#define __GRAPH_H__
 #include <cstdlib>
 #include <iostream>
 #include <limits>
@@ -39,7 +41,7 @@ public:
 private:
   string        payload;
   bool          visited;
-  double      min_distance;
+  int      min_distance;
   Node*       predShort;
   vector<Edge* >* adjacents;
 };
@@ -78,15 +80,18 @@ public:
 
   //Homework 
   bool IsThereTripletClique();
-  double GetMinDistance(string city1,string city2);
+  int GetMinDistance(string city1,string city2);
   bool isGraphConnected();
   int longestSimplePath();
+  map<string,Node*>* getGraph();
 
   
 private:
   bool IsThereTripletClique(Node*, Node*, int);
+  int getMaxDistance(Node* n, int);
   map<string,Node*>* graph;
   bool directed;
   // helper 
   void DijkstraShortest(Node*);
 };
+#endif

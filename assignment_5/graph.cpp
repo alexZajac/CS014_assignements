@@ -1,9 +1,12 @@
 #include "graph.h"
-#include<vector>
+#include <time.h>
+#include <vector>
+#include <chrono>
+using std::chrono::high_resolution_clock;
 
 Node* findMinAndPop(vector<Node*>* v){
   int min_distance = INT16_MAX, index_min = 0;
-  for (int i = 0; i < v->size(); ++i){
+  for (unsigned int i = 0; i < v->size(); ++i){
     if(v->at(i)->getMinDistance() < min_distance){
       min_distance = v->at(i)->getMinDistance();
       index_min = i;
@@ -67,29 +70,6 @@ void Graph::printGraph() {
     cout << "]" << endl;
   }
 }
-
-// bool hasOneInCommon(vector<string>* v1, vector<string>* v2){
-//   for(string s1 : *v1)
-//     for(string s2 : *v2)
-//       if(s1==s2)
-//         return true;
-//   return false;
-// }
-
-// bool Graph::IsThereTripletClique(){
-
-//   for (map<string,Node* >::iterator it=graph->begin(); it != graph->end();it++) {
-//     if(it->second->neighbors()->size()>1){
-//       vector<string>* neigh  = it->second->neighbors(); 
-//       for(vector<string>::iterator itn=neigh->begin();itn!=neigh->end();itn++) {
-//         if(hasOneInCommon(neigh,this->graph->at(*itn)->neighbors())){
-//           return true;
-//         }
-//       }
-//     }
-//   }
-//   return false;
-// }
 
 bool Graph::IsThereTripletClique(Node* origin, Node* current,int depth){
 
@@ -166,7 +146,7 @@ bool Graph::IsThereTripletClique(){
     return visited.size() == this->graph->size();
  }
  // WE ASSUME THAT NODE DO NOT HAVE A LARGER DISTANCE THAN INT16_MAX
- double Graph::GetMinDistance(string city1, string city2){
+ int Graph::GetMinDistance(string city1, string city2){
    // getting start and end node
    map<string,Node* >::iterator it1,it2;
    it1 = graph->find(city1);
@@ -181,30 +161,134 @@ bool Graph::IsThereTripletClique(){
    return end->getMinDistance();
  }
 
- bool Graph::isGraphConnected() {
-   //NICO
+ map<string,Node*>* Graph::getGraph(){
+   return this->graph;
  }
 
+ // longest distance you can travel (weights) to with no cycle
  int Graph::longestSimplePath() {
-  //TODO
+   int max_distance = 0;
+   map<string,Node* >::iterator it;
+   for(it=graph->begin(); it!=graph->end(); it++) {
+      Node* n = (*it).second;
+      int curr_distance = this->getMaxDistance(n, 0);
+      if (curr_distance > max_distance)
+          max_distance = curr_distance;
+   }
+   return max_distance;
+ }
+
+ int Graph::getMaxDistance(Node* n, int currDistance){
+    n->setVisited(true);
+    int max_distance = currDistance;
+    for (Edge* adjE : *(n->adjacentsList())){
+        Node* adjV = adjE->getNode();
+        int pathDistance = currDistance;
+        if(!adjV->isVisited())
+            pathDistance = getMaxDistance(adjV, currDistance + adjE->getWeight());
+        max_distance = max(pathDistance, max_distance);
+    }
+    n->setVisited(false); 
+    return max_distance;
+ }
+
+ Graph* createGraph(int num_nodes=100, int num_edges=500, int num_weights=3, bool directed=false){
+   Graph* g = new Graph(directed);
+   srand(0);
+   // 100 nodes
+   for(int i = 0; i < num_nodes; i++){
+     g->addNode(to_string(i));
+   }
+   // 500 with weight1, 500 with weight 2 and 500 with weight 3
+   int weight = 1;
+   while(weight <= num_weights){
+     for(int i = 0; i < num_edges; i++){
+       string r1 = to_string(rand() % num_nodes);
+       string r2 = to_string(rand() % num_nodes);
+       // checking if connection is already there
+       bool is_valid = true;
+       map<string,Node* >::iterator it;
+       Node* n = (g->getGraph()->find(r1))->second;
+       for (Edge* e : *(n->adjacentsList()))
+          if(e->getNode()->getPayload() == r2)
+            is_valid = false;
+
+       while(r1 == r2 || !is_valid){
+          r1 = to_string(rand() % num_nodes);
+          r2 = to_string(rand() % num_nodes);
+          is_valid = true;
+          map<string,Node* >::iterator it;
+          Node* n = (g->getGraph()->find(r1))->second;
+          for (Edge* e : *n->adjacentsList())
+              if(e->getNode()->getPayload() == r2)
+                is_valid = false;
+       }
+       // valid connection
+       g->addEdge(r1, r2);
+     }
+     weight++;
+   }
+   return g;
  }
 
 
+ void time_testing(){
+   int n_nodes = 100;
+   bool directed = false;
+   // shouldn't exceed n*(n-1)/6 for undirected and n*(n-1)/3 for directed, since that's the max unique edges times the n_weight
+   int n_weights = 3;
+   int n_edges = n_nodes*(n_nodes-1)/(directed ? n_weights : n_weights*2);
+   Graph* g = createGraph(n_nodes, n_edges, n_weights, directed);
+   g->printGraph();
 
-int main() {
-  cout << "Graph Example 2.0\n";
+   cout << "Measuring isTripletClique(): \n";
+   auto s1 = high_resolution_clock::now();
+   bool b1 = g->IsThereTripletClique();
+   auto e1 = high_resolution_clock::now();
+   cout << "Result: " << b1 << endl;
+   std::chrono::duration<double> elapsed1 = e1 - s1;
+   cout << "Duration of execution: " << elapsed1.count() << endl;
+
+   cout << "Measuring isConnected(): \n";
+   auto s2 = high_resolution_clock::now();
+   bool b2 = g->isGraphConnected();
+   auto e2 = high_resolution_clock::now();
+   cout << "Result: " << b2 << endl;
+   std::chrono::duration<double> elapsed2 = e2 - s2;
+   cout << "Duration of execution: " << elapsed2.count() << endl;
+
+   cout << "Measuring getMinDistance(): \n";
+   string r1 = to_string(rand() % n_nodes);
+   string r2 = to_string(rand() % n_nodes);
+   while(r1 == r2){
+      r1 = to_string(rand() % n_nodes);
+      r2 = to_string(rand() % n_nodes);
+   }
+   cout << "First city: " + r1 << endl;
+   cout << "Second city: " + r2 << endl; 
+   auto s3 = high_resolution_clock::now();
+   int res1 = g->GetMinDistance(r1, r2);
+   auto e3 = high_resolution_clock::now();
+   cout << "Result: " << res1 << endl;
+   std::chrono::duration<double> elapsed3 = e3 - s3;
+   cout << "Duration of execution: " << elapsed3.count() << endl;
+
+   cout << "Measuring longestSimplePath(): \n";
+   auto s4 = high_resolution_clock::now();
+   int res2 = g->longestSimplePath();
+   auto e4 = high_resolution_clock::now();
+   cout << "Result: " << res2 << endl;
+   std::chrono::duration<double> elapsed4 = e4 - s4;
+   cout << "Duration of execution: " << elapsed4.count() << endl;
+   
+ }
+
+
+ void function_testing(){
+   cout << "Graph Example 2.0\n";
   // undirected
   Graph g(false);
   
-
-  g.addNode("a");
-  g.addNode("b");
-  g.addNode("c");
-
-  //g.addEdge("a","b",10);
-  g.addEdge("b","c",5);
-  g.addEdge("c","a",9);
-
   g.addNode("e");
   g.addNode("f");
   g.addNode("h");
@@ -220,10 +304,14 @@ int main() {
   g.addEdge("g","j",7);
   g.addEdge("g","k",5);
   g.addEdge("j","k", 8);
-  double d = g.GetMinDistance("e", "g");
-  cout << "Min distance: " << d << endl;
-
+  int d = g.longestSimplePath();
+  cout << "Max distance: " << d << endl;
   g.printGraph();
+ }
+
+
+int main() {
+  time_testing();
   cout << system("pause");
 }
 
